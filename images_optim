@@ -2,14 +2,18 @@
 #
 # Optimize JPG and PNG images older than 7 days
 # Dependencies: jpegoptim, optipng
+#
+# Author: Luigi Mozzillo
+# Version: 1.0
+# Date: 2018-09-27
 
-# Check first parameter
+# Check the first parameter
 if [ "$#" -eq 0 ]; then
         echo "Use: images_optim /path/to/folder (all)"
         exit
 fi
 
-# Check if second parameter exists
+# Check if the second parameter exists
 MTIME="-mtime 7"
 if [ "$#" -ne 1 ]; then
         if [ $2 = "all" ]; then
