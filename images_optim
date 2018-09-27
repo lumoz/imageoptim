@@ -5,7 +5,7 @@
 
 # Check first parameter
 if [ "$#" -eq 0 ]; then
-        echo "Use `imageoptim /path/to/folder (all)`"
+        echo "Use: images_optim /path/to/folder (all)"
         exit
 fi
 
