@@ -1,0 +1,30 @@
+#!/bin/bash
+#
+# Optimize JPG and PNG images older than 7 days
+# Dependencies: jpegoptim, optipng
+
+# Check first parameter
+if [ "$#" -eq 0 ]; then
+        echo "Use `imageoptim /path/to/folder (all)`"
+        exit
+fi
+
+# Check if second parameter exists
+MTIME="-mtime 7"
+if [ "$#" -ne 1 ]; then
+        if [ $2 = "all" ]; then
+                MTIME=""
+        fi
+fi
+
+# -----
+
+# Find all JPEG files recent 7 days and optimize it, set quality = 80;
+# preserve file modification time and strip comment and EXIF data
+find $1 -type f $MTIME \( -iname \*.jpg -o -iname \*.jpeg \) -exec jpegoptim -m 80 -p --strip-all {} \;
+
+# -----
+
+# Find all PNG files recent 7 days and optimize it.
+# Preserve file modification data.
+find $1 -type f $MTIME -iname "*.png" -exec optipng -preserve {} \;
